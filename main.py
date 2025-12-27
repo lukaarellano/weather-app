@@ -19,8 +19,6 @@ with open("data.json", "r+") as json_file:
     data["conditions"] = conditions
     data["temphigh"] = temphigh
     data["tempmin"] = tempmin
-
-    print(data)
     
     json_file.seek(0, 0)
     json.dump(data, json_file)
