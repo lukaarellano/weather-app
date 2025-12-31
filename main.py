@@ -7,11 +7,11 @@ response = requests.get("https://weather.visualcrossing.com/VisualCrossingWebSer
 print(response.status_code)
 
 weatherDict = response.json()
-temperature = weatherDict["currentConditions"]["temp"]
-datetime = weatherDict["currentConditions"]["datetime"]
-conditions = weatherDict['currentConditions']['conditions']
-temphigh = weatherDict['currentConditions']['tempmax']
-tempmin = weatherDict['currentConditions']['tempmin']
+temperature = weatherDict['days'][0]["temp"]
+datetime = weatherDict['days'][0]["datetime"]
+conditions = weatherDict['days'][0]['conditions']
+temphigh = weatherDict['days'][0]['tempmax']
+tempmin = weatherDict['days'][0]['tempmin']
 
 def update_weather():
     with open("weather-app/data/data.json", "r+") as json_file:
@@ -21,7 +21,7 @@ def update_weather():
         data["conditions"] = conditions
         data["temphigh"] = temphigh
         data["tempmin"] = tempmin
-        
+
         json_file.seek(0, 0)
         json.dump(data, json_file)
         json_file.truncate()
